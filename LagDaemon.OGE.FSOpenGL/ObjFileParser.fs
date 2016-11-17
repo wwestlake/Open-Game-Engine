@@ -77,7 +77,7 @@ module ObjFileParser =
             match list with
             | [] -> result
             | head :: tail -> inner tail ((run pFile head) :: result)
-        inner strList []                                      
+        inner strList [] |> List.rev                                     
         
 
 (* testing only
@@ -95,7 +95,7 @@ module ObjFileParser =
                      "vn 1 2 3";
                      "vn 1 2 3"]
 
-    let p = List.rev (parseLines lines)
+    let p = parseLines lines
 
     // results
 val p : ParserResult<ObjLine,unit> list =
