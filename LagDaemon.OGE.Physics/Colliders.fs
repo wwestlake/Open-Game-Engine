@@ -97,20 +97,16 @@ module Collider =
         | true -> Collision 
         | false -> NoCollision
 
-    // needs better error checking
     let collideBox wp vpair point =
         let put = normalize wp point
         let (va,vb) = vpair
         let v1  = normalize wp va 
         let v2  = normalize wp vb
         match ((between v1.[0] v2.[0] put.[0]), 
-              (between v1.[1] v2.[1] put.[1]),
-              (between v1.[2] v2.[2] put.[2])) with
+               (between v1.[1] v2.[1] put.[1]),
+               (between v1.[2] v2.[2] put.[2])) with
         | (true, true, true) -> Collision
-        | _            -> NoCollision
-
-
-
+        | _                  -> NoCollision
 
     let collide collider point =
         match collider with
