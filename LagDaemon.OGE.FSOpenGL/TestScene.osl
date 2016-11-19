@@ -1,0 +1,15 @@
+
+(* Test Scene *)
+
+scene "Main Scene" {
+
+  landscape <- generateLandScape perlin 1024 1024
+  skybox <- "FancySkybox.sky" with dayNightCycle 
+  
+  
+
+
+
+}
+
+
