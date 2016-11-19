@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.FSOpenGL", "L
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Loader", "LagDaemon.OGE.Loader\LagDaemon.OGE.Loader.fsproj", "{04F7488F-869E-4ADB-9D44-26A0E9F4D745}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Physics", "LagDaemon.OGE.Physics\LagDaemon.OGE.Physics.fsproj", "{13994A8C-FC51-4C3C-B6FF-93873A0448ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{04F7488F-869E-4ADB-9D44-26A0E9F4D745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04F7488F-869E-4ADB-9D44-26A0E9F4D745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04F7488F-869E-4ADB-9D44-26A0E9F4D745}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -37,6 +37,7 @@ module ObjFileParser =
         | VLine of OValue * OValue * OValue
         | VTLine of OValue * OValue * OOptionValue
         | VNLine of OValue * OValue * OValue
+        | FLine of OValue list
         | Comment
 
 
@@ -68,6 +69,11 @@ module ObjFileParser =
     let pVNLine : Parser<_> = 
         let point = pipe3 (spaces >>. pfloat) (spaces >>. pfloat) (spaces >>. pfloat) (fun x y z -> VNLine (OValue x,OValue y,OValue z)) 
         (pstring "vn" >>. point .>> opt newline)
+
+    //let pFLine : Parser<_> =
+    //    let pflist = many1 (spaces >>. pint32 .>> opt (pstring "/"))
+    //    pstring "f" >>. 
+        
 
     let pFile  : Parser<_> = choice [pVTLine; pVNLine; pVLine; pComment]
 
