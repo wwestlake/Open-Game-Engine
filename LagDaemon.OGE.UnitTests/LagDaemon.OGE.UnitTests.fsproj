@@ -5,16 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>04f7488f-869e-4adb-9d44-26a0e9f4d745</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>LagDaemon.OGE.Loader</RootNamespace>
-    <AssemblyName>LagDaemon.OGE.Loader</AssemblyName>
+    <ProjectGuid>9a08741c-0d1a-4d5b-a725-b7c4bf4a4efb</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>LagDaemon.OGE.UnitTests</RootNamespace>
+    <AssemblyName>LagDaemon.OGE.UnitTests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
-    <Name>LagDaemon.OGE.Loader</Name>
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Name>LagDaemon.OGE.UnitTests</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -24,9 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Debug\LagDaemon.OGE.Loader.XML</DocumentationFile>
-    <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>bin\Debug\LagDaemon.OGE.UnitTests.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,9 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>bin\Release\LagDaemon.OGE.Loader.XML</DocumentationFile>
-    <Prefer32Bit>true</Prefer32Bit>
+    <DocumentationFile>bin\Release\LagDaemon.OGE.UnitTests.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
@@ -55,54 +49,51 @@
     </Otherwise>
   </Choose>
   <Import Project="$(FSharpTargetsPath)" />
-  <Import Project="..\packages\OpenTK.Next.1.1.1616.8959\build\OpenTK.Next.targets" Condition="Exists('..\packages\OpenTK.Next.1.1.1616.8959\build\OpenTK.Next.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\OpenTK.Next.1.1.1616.8959\build\OpenTK.Next.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OpenTK.Next.1.1.1616.8959\build\OpenTK.Next.targets'))" />
-  </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="SystemInitialization.fs" />
-    <Compile Include="Program.fs" />
-    <None Include="App.config" />
+    <Compile Include="ColliderTests.fs" />
+    <None Include="Script.fsx" />
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="FSharp.Core, Version=$(TargetFSharpCoreVersion), Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <Reference Include="FSharp.Core">
+      <HintPath>..\packages\FSharp.Core.3.1.2.5\lib\net40\FSharp.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="OpenTK">
-      <HintPath>..\packages\OpenTK.Next.1.1.1616.8959\lib\net20\OpenTK.dll</HintPath>
+    <Reference Include="FsUnit.NUnit">
+      <HintPath>..\packages\FsUnit.2.3.2\lib\net45\FsUnit.NUnit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics">
+      <HintPath>..\packages\MathNet.Numerics.3.13.1\lib\net40\MathNet.Numerics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MathNet.Numerics.FSharp">
+      <HintPath>..\packages\MathNet.Numerics.FSharp.3.13.1\lib\net40\MathNet.Numerics.FSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="mscorlib" />
+    <Reference Include="NHamcrest">
+      <HintPath>..\packages\FsUnit.2.3.2\lib\net45\NHamcrest.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.5.0\lib\net45\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LagDaemon.OGE.FileManager\LagDaemon.OGE.FileManager.fsproj">
-      <Name>LagDaemon.OGE.FileManager</Name>
-      <Project>{4d2e5498-9a13-48e3-b9ab-09eb28c42ec1}</Project>
+    <ProjectReference Include="..\LagDaemon.OGE.Loader\LagDaemon.OGE.Loader.fsproj">
+      <Name>LagDaemon.OGE.Loader</Name>
+      <Project>{04f7488f-869e-4adb-9d44-26a0e9f4d745}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\LagDaemon.OGE.FSOpenGL\LagDaemon.OGE.FSOpenGL.fsproj">
-      <Name>LagDaemon.OGE.FSOpenGL</Name>
-      <Project>{ff819ca0-b5e6-4b10-aaad-069a932e9ea1}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\LagDaemon.OGE.InterfaceTypes\LagDaemon.OGE.InterfaceTypes.fsproj">
-      <Name>LagDaemon.OGE.InterfaceTypes</Name>
-      <Project>{032078a2-3a8b-4f1a-8faf-a33f1a3abb4c}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\LagDaemon.OGE.Logging\LagDaemon.OGE.Logging.fsproj">
-      <Name>LagDaemon.OGE.Logging</Name>
-      <Project>{6a630a4e-649b-4bc1-8fd2-508c6cd7e880}</Project>
+    <ProjectReference Include="..\LagDaemon.OGE.Physics\LagDaemon.OGE.Physics.fsproj">
+      <Name>LagDaemon.OGE.Physics</Name>
+      <Project>{13994a8c-fc51-4c3c-b6ff-93873a0448ed}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

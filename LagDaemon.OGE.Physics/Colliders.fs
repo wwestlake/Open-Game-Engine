@@ -48,7 +48,8 @@ module Collider =
         | Sphere of WorldPosition * Radius
         | Box of WorldPosition * VertexPair
         | Capsule of WorldPosition * Radius * Height
-    
+   
+
     let point v = 
         (TestPoint v)
 
@@ -67,8 +68,8 @@ module Collider =
     let sphere (wp: WorldPosition) (radius: Radius) =
         Sphere (wp, radius)    
     
-    let box wp vlist =
-        (Box (wp, vlist))
+    let box wp vpair =
+        (Box (wp, (VertexPair vpair)))
 
     let capsule wp radius height =
         (Capsule (wp, radius, height))
@@ -76,7 +77,7 @@ module Collider =
     let between (x: float) y a =
         let r = max x y
         let l = min x y
-        (r <= a) && (a <= l)
+        (l <= a) && (a <= r)
 
 
     /// Normalize the point we are checking to be relative to zero 

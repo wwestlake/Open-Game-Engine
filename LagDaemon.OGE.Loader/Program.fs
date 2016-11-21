@@ -17,22 +17,35 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     Source code available at: https://github.com/wwestlake/Open-Game-Engine
-*)  
-open System
-open System.Drawing
-open OpenTK
-open OpenTK.Graphics.OpenGL
-open LagDaemon.OGE.FSOpenGL.Game
+*)
 
-[<EntryPoint>]
-let main argv = 
-    printfn "Open Game Engine - Loader"
+namespace LagDaemon.OGE.Loader
 
-    let game = new Game(new GameWindow())
-    game.run()
+module LoaderEntry =
+  
+    open System
+    open System.Drawing
+    open OpenTK
+    open OpenTK.Graphics.OpenGL
+    open LagDaemon.OGE.FSOpenGL.Game
+    open LagDaemon.OGE.InterfaceTypes.MessageTypes
+    open LagDaemon.OGE.Logging.ServerLog
+    open SystemInitialization
+
+    [<EntryPoint>]
+    let main argv = 
+        systemLog.Log (createInfoEntry "Open Game Engine - Loader")
+
+        try
+            do systemInit ()
+            let game = new Game(new GameWindow())
+            game.run()
+        with 
+            | ex -> systemLog.Log (createExceptionEntry "An Exception was thrown starting the engine, game exiting" ex )
 
 
-    printfn "Press Any Key to Exit"
-    System.Console.ReadKey(false) |> ignore
 
-    0 // return an integer exit code
+        systemLog.Log (createInfoEntry "Game Engine Shut Down, Press and Key to Exit")
+        System.Console.ReadKey(false) |> ignore
+
+        0 // return an integer exit code

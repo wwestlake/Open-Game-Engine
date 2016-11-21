@@ -9,6 +9,18 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Loader", "Lag
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Physics", "LagDaemon.OGE.Physics\LagDaemon.OGE.Physics.fsproj", "{13994A8C-FC51-4C3C-B6FF-93873A0448ED}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.UnitTests", "LagDaemon.OGE.UnitTests\LagDaemon.OGE.UnitTests.fsproj", "{9A08741C-0D1A-4D5B-A725-B7C4BF4A4EFB}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.FileManager", "LagDaemon.OGE.FileManager\LagDaemon.OGE.FileManager.fsproj", "{4D2E5498-9A13-48E3-B9AB-09EB28C42EC1}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Server", "LagDaemon.OGE.Server\LagDaemon.OGE.Server.fsproj", "{5609D081-F017-41BF-897C-3B8F29928A0D}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Logging", "LagDaemon.OGE.Logging\LagDaemon.OGE.Logging.fsproj", "{6A630A4E-649B-4BC1-8FD2-508C6CD7E880}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.MessageService", "LagDaemon.OGE.MessageService\LagDaemon.OGE.MessageService.fsproj", "{33FAAC87-1EB9-43DB-8CE9-45EB2BB5E13E}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.InterfaceTypes", "LagDaemon.OGE.InterfaceTypes\LagDaemon.OGE.InterfaceTypes.fsproj", "{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +39,30 @@ Global
 		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{13994A8C-FC51-4C3C-B6FF-93873A0448ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A08741C-0D1A-4D5B-A725-B7C4BF4A4EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A08741C-0D1A-4D5B-A725-B7C4BF4A4EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A08741C-0D1A-4D5B-A725-B7C4BF4A4EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A08741C-0D1A-4D5B-A725-B7C4BF4A4EFB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D2E5498-9A13-48E3-B9AB-09EB28C42EC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D2E5498-9A13-48E3-B9AB-09EB28C42EC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D2E5498-9A13-48E3-B9AB-09EB28C42EC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D2E5498-9A13-48E3-B9AB-09EB28C42EC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5609D081-F017-41BF-897C-3B8F29928A0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5609D081-F017-41BF-897C-3B8F29928A0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5609D081-F017-41BF-897C-3B8F29928A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5609D081-F017-41BF-897C-3B8F29928A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A630A4E-649B-4BC1-8FD2-508C6CD7E880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A630A4E-649B-4BC1-8FD2-508C6CD7E880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A630A4E-649B-4BC1-8FD2-508C6CD7E880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A630A4E-649B-4BC1-8FD2-508C6CD7E880}.Release|Any CPU.Build.0 = Release|Any CPU
+		{33FAAC87-1EB9-43DB-8CE9-45EB2BB5E13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{33FAAC87-1EB9-43DB-8CE9-45EB2BB5E13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{33FAAC87-1EB9-43DB-8CE9-45EB2BB5E13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{33FAAC87-1EB9-43DB-8CE9-45EB2BB5E13E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
