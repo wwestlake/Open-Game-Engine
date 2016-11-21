@@ -17,6 +17,6 @@ namespace LagDaemon.OGE.InterfaceTypes
       observer y
       y
       
-    
+        
     
     
