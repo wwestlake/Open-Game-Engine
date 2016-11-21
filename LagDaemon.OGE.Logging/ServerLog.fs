@@ -27,6 +27,7 @@ open LagDaemon.OGE.FileManager.FileIO
 
 module ServerLog =
 
+    /// writes a log entry to the console
     let consoleLog msg = 
         let {
             TimeStamp = timeStamp;
@@ -39,6 +40,7 @@ module ServerLog =
         | _                   -> printfn "%A - %A; %A" timeStamp severity criticality
     
 
+    /// writes a log entry to the daily log file inthe system logs directory
     let fileLog msg =
         let {
             TimeStamp = timeStamp;
@@ -57,6 +59,7 @@ module ServerLog =
         | _                   -> let text = sprintf "%A - %A; %A\n" timeStamp severity criticality
                                  writer.WriteLine( text )
 
+    /// handles the system log mail box
     type SystemLogger(loggers) =
         let loggers = loggers
         let agent = MailboxProcessor.Start(fun inbox ->
@@ -71,6 +74,7 @@ module ServerLog =
         member this.Log msg = agent.Post msg
 
 
+    /// the system log used to send log entrys to the mailbox queue
     let systemLog = new SystemLogger(
                         seq { 
                             yield consoleLog
