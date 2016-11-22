@@ -29,23 +29,23 @@ module LoaderEntry =
     open OpenTK.Graphics.OpenGL
     open LagDaemon.OGE.FSOpenGL.Game
     open LagDaemon.OGE.InterfaceTypes.MessageTypes
-    open LagDaemon.OGE.Logging.ServerLog
+    open LagDaemon.OGE.MessageService.Router
     open SystemInitialization
 
     [<EntryPoint>]
     let main argv = 
-        systemLog.Log (createInfoEntry "Open Game Engine - Loader")
+        router.Send (createLogEnvelope (createInfoEntry "Open Game Engine - Loader"))
 
         try
             do systemInit ()
             let game = new Game(new GameWindow())
             game.run()
         with 
-            | ex -> systemLog.Log (createExceptionEntry "An Exception was thrown starting the engine, game exiting" ex )
+            | ex -> router.Send (createLogEnvelope (createExceptionEntry "An Exception was thrown starting the engine, game exiting" ex ))
 
 
 
-        systemLog.Log (createInfoEntry "Game Engine Shut Down, Press and Key to Exit")
+        router.Send (createLogEnvelope (createInfoEntry "Game Engine Shut Down, Press and Key to Exit"))
         System.Console.ReadKey(false) |> ignore
 
         0 // return an integer exit code

@@ -21,7 +21,25 @@
 
 namespace LagDaemon.OGE.MessageService
 
+open LagDaemon.OGE.InterfaceTypes.MessageTypes
+open LagDaemon.OGE.Logging.ServerLog
 
+module Router =
 
+    type MessageRouter() =
+        let agent = MailboxProcessor.Start(fun inbox ->
+            let rec messageLoop () = async {
+                let! msg = inbox.Receive()
+                match msg with
+                | LogEntry le -> systemLog.Log le
+                | Credentials cr -> ()
+                return! messageLoop ()
+            }
+        
+            messageLoop()
+        )
 
+        member this.Send msg = agent.Post msg
+
+    let router = new MessageRouter()
 

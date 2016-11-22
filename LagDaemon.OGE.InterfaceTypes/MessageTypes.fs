@@ -22,28 +22,49 @@
 
 namespace LagDaemon.OGE.InterfaceTypes
 
+open System.IO
+open System.Runtime.Serialization
+open System.Runtime.Serialization.Json
+
 module MessageTypes =
 
-    type Severity = High | Medium  | Low
-            
+    [<DataContract>]
+    type Severity = | [<DataMember>] High | [<DataMember>] Medium  | [<DataMember>] Low
+     
+    [<DataContract>]        
     type Criticality =
-        | Info  of string
-        | Warning of string
-        | Error of string
-        | Exception of string * System.Exception 
+        | [<DataMember>] Info  of string
+        | [<DataMember>] Warning of string
+        | [<DataMember>] Error of string
+        | [<DataMember>] Exception of string * System.Exception 
 
-
+    [<DataContract>]
     type LogEntry = {
+        [<DataMember>] 
         TimeStamp: System.DateTime;
+
+        [<DataMember>]
         Severity: Severity;
+
+        [<DataMember>]
         Criticality: Criticality;
     }
 
+    [<DataContract>]
     type Credentials = {
+        [<DataMember>]
         Login: string;
+
+        [<DataMember>]
         Password: string;
     }
 
+    [<DataContract>]
+    type Envelope =
+    | [<DataMember>] LogEntry of LogEntry
+    | [<DataMember>] Credentials of Credentials
+
+    let createLogEnvelope logentry = LogEntry logentry
 
     let createInfoEntry str = {
                     TimeStamp = System.DateTime.Now;
@@ -69,3 +90,8 @@ module MessageTypes =
                     Severity = High;
                     Criticality = Exception (str, ex);
                 }
+
+    let serialize (t: 'T) (stream: Stream) =
+        let ser = new DataContractJsonSerializer(t.GetType())
+        ser.WriteObject(stream, t)
+
