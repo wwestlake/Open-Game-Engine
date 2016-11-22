@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="GeneralFunctions.fs" />
     <Compile Include="MessageTypes.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
