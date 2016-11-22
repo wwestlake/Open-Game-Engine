@@ -23,6 +23,10 @@ namespace LagDaemon.OGE.FileManager
 
 open System
 open System.IO
+open System.Runtime.Serialization
+open System.Runtime.Serialization.Json
+open System.Xml
+open LagDaemon.OGE.InterfaceTypes.MessageTypes
 
 module FileIO =
     
@@ -67,10 +71,14 @@ module FileIO =
         /// opens an existing file for read write access in append mode 
         let fopenAppend filepath = new StreamWriter( File.Open(filepath, FileMode.Append))
 
-
+    
+    [<AutoOpen>]
     module Serialize =
-        
-        let x = ""
+
+
+        let serialize (t: 'T) (stream: Stream) =
+            let ser = new DataContractJsonSerializer(t.GetType())
+            ser.WriteObject(stream, t)
         
 
 
