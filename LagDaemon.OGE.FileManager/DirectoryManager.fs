@@ -25,6 +25,7 @@ namespace LagDaemon.OGE.FileManager
 open System
 open System.IO
 open FileIO
+open LagDaemon.OGE.InterfaceTypes.ErrorHandling
 
 [<AutoOpen>]
 module DirectoryManager =
@@ -59,9 +60,15 @@ module DirectoryManager =
     let directoryCheck =
         [
             for d in allDirectories do
-                if not (FileIO.Directory.exists d) then
-                    yield FileIO.Directory.create d
-                else yield FileIO.Directory.info d
+                let result = 
+                    match FileIO.Directory.exists d with
+                    | Success (exist,_) -> if exist 
+                                           then FileIO.Directory.create d |> succeed 
+                                           else fail "No file" 
+
+                    | Failure msg -> "Exception " |> fail 
+
+                yield result
         ]
 
 

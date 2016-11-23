@@ -31,21 +31,32 @@ module LoaderEntry =
     open LagDaemon.OGE.InterfaceTypes.MessageTypes
     open LagDaemon.OGE.MessageService.Router
     open SystemInitialization
+    open LagDaemon.OGE.Server.Listener
 
     [<EntryPoint>]
     let main argv = 
-        router.Send (createLogEnvelope (createInfoEntry "Open Game Engine - Loader"))
+        logInfo "Open Game Engine - Loader"
 
         try
-            do systemInit ()
-            let game = new Game(new GameWindow())
-            game.run()
+
+            async {
+                do EchoService "127.0.0.1" 12321
+            
+            } |> Async.Start
+
+            async {
+                do systemInit ()
+                let game = new Game(new GameWindow())
+                game.run()
+            } |> Async.RunSynchronously
+
+
         with 
-            | ex -> router.Send (createLogEnvelope (createExceptionEntry "An Exception was thrown starting the engine, game exiting" ex ))
+            | ex -> logException "An Exception was thrown starting the engine, game exiting" ex 
 
 
 
-        router.Send (createLogEnvelope (createInfoEntry "Game Engine Shut Down, Press and Key to Exit"))
+        logInfo "Game Engine Shut Down, Press and Key to Exit"
         System.Console.ReadKey(false) |> ignore
 
         0 // return an integer exit code

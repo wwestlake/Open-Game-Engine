@@ -27,58 +27,140 @@ open System.Runtime.Serialization
 open System.Runtime.Serialization.Json
 open System.Xml
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
+open LagDaemon.OGE.InterfaceTypes.ErrorHandling
 
 module FileIO =
+
+    /// calls the RoP fail method with an exception message as string list
+    let failex (ex: Exception) = fail [ex.ToString()]
     
     module Directory =
 
+
         /// checks the existance of a directory
-        let exists path = Directory.Exists(path)
+        let exists path = succeed (Directory.Exists(path))
 
         /// creates a directory at the specified path (and any parent direcoties required)
-        let create path = Directory.CreateDirectory(path)
+        let create path = 
+            try
+                succeed (Directory.CreateDirectory(path))
+            with 
+                | ex -> failex ex
 
-        let info path = DirectoryInfo(path)
+        let info path = 
+            try
+                succeed (DirectoryInfo(path))
+            with
+                | ex -> failex ex
 
         /// gets a listing of all directories at the specified path
-        let getDirectories path = Directory.EnumerateDirectories(path)
+        let getDirectories path = 
+            try
+                succeed (Directory.EnumerateDirectories(path))
+            with
+                | ex -> failex ex
 
         /// gets a listing of all files at the specified path
-        let getFiles path = Directory.EnumerateFiles(path)
+        let getFiles path = 
+            try
+                succeed (Directory.EnumerateFiles(path))
+            with
+                | ex -> failex ex
 
     module File =
         
         /// checks the existance of a file
-        let exists filepath = File.Exists(filepath)
+        let exists filepath = succeed (File.Exists(filepath))
 
         /// creates or overwrites a random access file
-        let create filepath = File.Create(filepath, 4096, FileOptions.RandomAccess)
-
+        let create filepath = 
+            try
+                succeed (File.Create(filepath, 4096, FileOptions.RandomAccess))
+            with
+                | ex -> failex ex
+            
         /// creates or overwrites a text file
-        let createText filepath = File.CreateText(filepath)
+        let createText filepath = 
+            try
+                succeed (File.CreateText(filepath))
+            with
+                | ex -> failex ex
 
         /// opens a file for access (used for binary random access files)
-        let fopen filepath = File.Open(filepath, FileMode.Open)
+        let fopen filepath = 
+            try
+                succeed (File.Open(filepath, FileMode.Open))
+            with
+                | ex -> failex ex
+
 
         /// opens a text file for read access
         /// returns a StreamReader
-        let fopenText filepath = File.OpenText(filepath)
+        let fopenText filepath = 
+            try
+                succeed (File.OpenText(filepath))
+            with
+                | ex -> failex ex
+
 
         /// opens an existing file or creates a new file for writing
         // returns a StreamWriter
-        let fopenWrite filepath = new StreamWriter( File.OpenWrite(filepath) )
+        let fopenWrite filepath = 
+            try
+                succeed (new StreamWriter(File.OpenWrite(filepath)))
+            with
+                | ex -> failex ex
+
 
         /// opens an existing file for read write access in append mode 
-        let fopenAppend filepath = new StreamWriter( File.Open(filepath, FileMode.Append))
+        let fopenAppend filepath = 
+            try
+                succeed (new StreamWriter( File.Open(filepath, FileMode.Append)))
+            with
+                | ex -> failex ex
 
+
+        type IOBuilder() =
+            member this.Bind(x,f) =
+                match x with 
+                | Success (e,_) -> f e
+                | Failure msg   -> Failure msg
+
+            
+            member this.Return(x) = 
+                match x with
+                | Success (x,msg) -> Success (x,msg)
+                | Failure msg     -> Failure msg
     
+            member this.ReturnFrom(x) = x
+
+            member this.Zero(x) = () |> succeed
+
+            member this.TryFinally(body, compensation) =
+                try 
+                    this.ReturnFrom(body())
+                finally 
+                    compensation() 
+
+            member this.Using(disposable:#System.IDisposable, body) =
+                let body' = fun () -> body disposable
+                this.TryFinally(body', fun () -> 
+                    match disposable with 
+                        | null -> () 
+                        | disp -> disp.Dispose())
+
+        let iorunner = new IOBuilder()
+
     [<AutoOpen>]
     module Serialize =
 
 
         let serialize (t: 'T) (stream: Stream) =
             let ser = new DataContractJsonSerializer(t.GetType())
-            ser.WriteObject(stream, t)
+            let fmtStr = JsonReaderWriterFactory.CreateJsonWriter(stream, Text.Encoding.UTF8, true, true, "  " )
+            ser.WriteObject(fmtStr, t)
+            fmtStr.Flush()
+            
         
 
 

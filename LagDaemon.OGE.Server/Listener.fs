@@ -26,9 +26,10 @@ open System.IO
 open System.Net
 open System.Net.Sockets
 open System.Threading
-open LagDaemon.OGE.Logging.ServerLog
+open LagDaemon.OGE
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
-open LagDaemon.OGE.Logging.ServerLog
+open LagDaemon.OGE.InterfaceTypes.ErrorHandling
+open LagDaemon.OGE.MessageService.Router
 
 module Listener =
 
@@ -65,9 +66,9 @@ module Listener =
             while not inp.EndOfStream do
                 let! data = Async.AwaitTask (inp.ReadLineAsync())
                 match data with
-                | line -> printfn "< %s" line
+                | line -> logInfo (sprintf "%A < %s" (client.Client.RemoteEndPoint) line)
                           Async.AwaitTask (out.WriteLineAsync(line)) |> ignore
-            printfn "closed %A" client.Client.RemoteEndPoint
+            logInfo (sprintf "closed %A" client.Client.RemoteEndPoint)
             client.Close |> ignore
         } |> Async.Start
      
@@ -78,10 +79,10 @@ module Listener =
             | None -> failwith "Unable to start server"
 
         do listener.Listener.Start()
-        systemLog.Log (createInfoEntry (sprintf "echo service listening on %A" listener.Listener.Server.LocalEndPoint))
+        logInfo (sprintf "echo service listening on %A" listener.Listener.Server.LocalEndPoint)
         while true do
             let client = listener.Listener.AcceptTcpClient()
-            printfn "connect from %A" client.Client.RemoteEndPoint
+            logInfo (sprintf "connect from %A" client.Client.RemoteEndPoint)
             let job = async {
                 let c = client in try service client with _ -> () }
             Async.Start job

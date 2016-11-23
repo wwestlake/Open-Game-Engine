@@ -105,6 +105,11 @@
       <Project>{33faac87-1eb9-43db-8ce9-45eb2bb5e13e}</Project>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\LagDaemon.OGE.Server\LagDaemon.OGE.Server.fsproj">
+      <Name>LagDaemon.OGE.Server</Name>
+      <Project>{5609d081-f017-41bf-897c-3b8f29928a0d}</Project>
+      <Private>True</Private>
+    </ProjectReference>
   </ItemGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -57,9 +57,9 @@
       <Project>{032078a2-3a8b-4f1a-8faf-a33f1a3abb4c}</Project>
       <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\LagDaemon.OGE.Logging\LagDaemon.OGE.Logging.fsproj">
-      <Name>LagDaemon.OGE.Logging</Name>
-      <Project>{6a630a4e-649b-4bc1-8fd2-508c6cd7e880}</Project>
+    <ProjectReference Include="..\LagDaemon.OGE.MessageService\LagDaemon.OGE.MessageService.fsproj">
+      <Name>LagDaemon.OGE.MessageService</Name>
+      <Project>{33faac87-1eb9-43db-8ce9-45eb2bb5e13e}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>

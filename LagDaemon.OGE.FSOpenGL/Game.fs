@@ -23,6 +23,7 @@ namespace LagDaemon.OGE.FSOpenGL
 
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
 open LagDaemon.OGE.Logging.ServerLog
+open LagDaemon.OGE.InterfaceTypes.ErrorHandling
 
 module Game =
 
@@ -43,7 +44,7 @@ module Game =
         do window.Closing.Add(fun e -> x.closing(e))
 
         member x.load(e) =
-            systemLog.Log (createInfoEntry "Main game loading")
+            createInfoEntry "Main game loading" |> succeed |> systemLog.Log
         member x.resize(e) =
             do ()
         member x.updateFrame(e) =
@@ -54,7 +55,7 @@ module Game =
             window.SwapBuffers();
 
         member x.closing(e) =
-            systemLog.Log (createInfoEntry "Main game closing")
+            createInfoEntry "Main game closing" |> succeed |> systemLog.Log
         member x.run() =
             window.Run()
 

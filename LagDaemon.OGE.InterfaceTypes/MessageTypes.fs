@@ -24,6 +24,8 @@ namespace LagDaemon.OGE.InterfaceTypes
 
 open System.IO
 open System.Runtime.Serialization
+open System.Reflection
+open Microsoft.FSharp.Reflection
 
 /// From F# for fun and profit
 /// Scott Wlaschin
@@ -172,26 +174,35 @@ module ErrorHandling =
 
 module MessageTypes =
 
-    [<DataContract>]
+    [<KnownType("GetKnownTypes")>]
     type Severity = | [<DataMember>] High | [<DataMember>] Medium  | [<DataMember>] Low
+                    static member GetKnownTypes() =
+                        typedefof<Severity>.GetNestedTypes(BindingFlags.Public ||| BindingFlags.NonPublic) 
+                        |> Array.filter FSharpType.IsUnion
      
-    [<DataContract>]        
+    [<KnownType("GetKnownTypes")>]       
     type Criticality =
-        | [<DataMember>] Info  of string
-        | [<DataMember>] Warning of string
-        | [<DataMember>] Error of string
+        | [<DataMember>] Info
+        | [<DataMember>] Warning
+        | [<DataMember>] Error
         | [<DataMember>] Exception of string * System.Exception 
+        static member GetKnownTypes() =
+            typedefof<Severity>.GetNestedTypes(BindingFlags.Public ||| BindingFlags.NonPublic) 
+            |> Array.filter FSharpType.IsUnion
 
     [<DataContract>]
     type LogEntry = {
-        [<DataMember>] 
+        [<field : DataMember>] 
         TimeStamp: System.DateTime;
 
-        [<DataMember>]
+        [<field : DataMember>]
         Severity: Severity;
 
-        [<DataMember>]
+        [<field : DataMember>]
         Criticality: Criticality;
+
+        [<field : DataMember>]
+        Message: string;
     }
 
     [<DataContract>]
@@ -213,19 +224,22 @@ module MessageTypes =
     let createInfoEntry str = {
                     TimeStamp = System.DateTime.Now;
                     Severity = Low;
-                    Criticality = Info str;
+                    Criticality = Info;
+                    Message = str;
                 }
 
     let createWarningEntry str = {
                     TimeStamp = System.DateTime.Now;
                     Severity = Medium;
-                    Criticality = Warning str;
+                    Criticality = Warning;
+                    Message = str
                 }
 
     let createErrorEntry str = {
                     TimeStamp = System.DateTime.Now;
                     Severity = High;
-                    Criticality = Error str;
+                    Criticality = Error;
+                    Message = str;
                 }
 
 
@@ -233,6 +247,7 @@ module MessageTypes =
                     TimeStamp = System.DateTime.Now;
                     Severity = High;
                     Criticality = Exception (str, ex);
+                    Message = str;
                 }
 
 

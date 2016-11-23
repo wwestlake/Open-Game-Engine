@@ -23,6 +23,7 @@ namespace LagDaemon.OGE.MessageService
 
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
 open LagDaemon.OGE.Logging.ServerLog
+open LagDaemon.OGE.InterfaceTypes.ErrorHandling
 
 module Router =
 
@@ -31,7 +32,7 @@ module Router =
             let rec messageLoop () = async {
                 let! msg = inbox.Receive()
                 match msg with
-                | LogEntry le -> systemLog.Log le
+                | LogEntry le -> le |> succeed |> systemLog.Log
                 | Credentials cr -> ()
                 return! messageLoop ()
             }
@@ -43,3 +44,8 @@ module Router =
 
     let router = new MessageRouter()
 
+    let logInfo msg =
+        (createInfoEntry msg) |> createLogEnvelope |> router.Send 
+
+    let logException msg ex =
+        (createExceptionEntry msg ex )  |> createLogEnvelope |>   router.Send

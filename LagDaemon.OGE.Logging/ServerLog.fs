@@ -21,43 +21,34 @@
 
 namespace LagDaemon.OGE.Logging
 
+open System
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
 open LagDaemon.OGE.FileManager.DirectoryManager
 open LagDaemon.OGE.FileManager.FileIO
+open LagDaemon.OGE.InterfaceTypes.ErrorHandling
 
 module ServerLog =
 
     /// writes a log entry to the console
-    let consoleLog msg = 
-        let {
-            TimeStamp = timeStamp;
-            Severity = severity;
-            Criticality = criticality;
-            }  = msg
-        match criticality with
-        | Exception (msg, ex) -> printfn "%A - %A; %A" timeStamp severity msg
-                                 printfn "Exception -> %s\n%s\n%s" msg ex.Message ex.StackTrace
-        | _                   -> printfn "%A - %A; %A" timeStamp severity criticality
+    let consoleLog (msg: RopResult<LogEntry,string list>) = File.iorunner {
+        let! { TimeStamp = time; Severity = sev; Criticality = crit; Message = m}  = msg
+        let! result = match crit with
+                      | Exception (m,e) -> printfn "%A|%A|%A|%s\n%s"  time sev crit m e.StackTrace |> succeed
+                      | Info | Warning | Error -> printfn "%A|%A|%A|%s"  time sev crit m |> succeed
+        return msg
+    }
     
 
     /// writes a log entry to the daily log file inthe system logs directory
-    let fileLog msg =
-        let {
-            TimeStamp = timeStamp;
-            Severity = severity;
-            Criticality = criticality;
-            }  = msg
-        let today = System.DateTime.Now
-        let filename = sprintf "%d%d%d.log" today.Year  today.Month today.Day
+    let fileLog (msg: RopResult<LogEntry,string list>) = File.iorunner {
+        let filename = sprintf "%i%02i%02i.txt" DateTime.Now.Year DateTime.Now.Month DateTime.Now.Day
         let filepath = makefilepath logs filename
-        use writer = File.fopenAppend filepath
-        match criticality with
-        | Exception (msg, ex) -> let text = sprintf "%A - %A; %A\n" timeStamp severity msg
-                                 let extext = sprintf "Exception -> %s\n%s\n%s\n" msg ex.Message ex.StackTrace
-                                 writer.WriteLine( text )
-                                 writer.WriteLine( extext )
-        | _                   -> let text = sprintf "%A - %A; %A\n" timeStamp severity criticality
-                                 writer.WriteLine( text )
+        let! message = msg
+        use! file = File.fopenAppend filepath 
+        serialize message file.BaseStream         
+        return msg
+    }
+
 
     /// handles the system log mail box
     type SystemLogger(loggers) =
@@ -65,7 +56,7 @@ module ServerLog =
         let agent = MailboxProcessor.Start(fun inbox ->
             let rec messageLoop () = async {
                 let! msg = inbox.Receive()
-                loggers |> Seq.iter (fun logger -> logger msg)
+                loggers |> Seq.iter (fun logger -> logger msg |> ignore)
                 return! messageLoop ()
             }
         
