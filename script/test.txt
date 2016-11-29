@@ -1,1 +1,17 @@
+let game = MyNewGame 
+	name = "Some Game"
+	copyright = "(C)2016 Art Games"
+	description = {-
+		this is a long multi line description description
+	-}
+	
+	source = "assets/mygame/src"
+	models = "assets/mygame/models"
+	textures = "assests/mygame/textures"
 
+	(* Modules *)
+
+	let scene [main] = [source] "main.scene"
+	let scene [list] = [source] ["second.scene", "third.scene"]
+
+　
