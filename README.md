@@ -35,7 +35,6 @@ so long as getPlayerID has the signature  `Player -> PlayerID` then it can be i
 
 ```FSharp
           Engine.Player.set typeof<Player> getPlayerID
-          
 ```          
 
            
