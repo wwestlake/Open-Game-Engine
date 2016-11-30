@@ -26,7 +26,7 @@ A typical game will want to create a record of some kind the represents a player
               Lives: int;
               
            let getPlayerID {PlayerID playerID}  = playerID
-           
+
 so long as getPlayerID has the signature  `Player -> PlayerID` then it can be injected into the engine to allow the engine to obtain the ID from your record like this:
 
           Engine.Player.set typeof<Player> getPlayerID
