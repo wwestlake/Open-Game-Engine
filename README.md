@@ -14,6 +14,8 @@ The concept of a player.  Players are central to all games, and the player const
            type Identifier = Identofoer of System.Guid
            
            type PlayerID = PlayerID of Identifier
+           
+           
            
 A typical game will want to create a record of some kind the represents a player, along with constructors and accessor functions.  Here is an example:
 
