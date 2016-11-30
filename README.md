@@ -12,7 +12,7 @@ The domain model for this engine will be developed in three layers.  At the high
 The concept of a player.  Players are central to all games, and the player constuct is central to the operation of the engine.  A particular game (or instance) will extend this concept to the needs of the instance.  At the core of the system a user is simply an identifier.
 
 ```FSharp
-           type Identifier = Identofoer of System.Guid
+           type Identifier = Identifier of System.Guid
            
            type PlayerID = PlayerID of Identifier
 ```           
