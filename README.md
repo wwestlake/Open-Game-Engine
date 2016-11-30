@@ -11,6 +11,7 @@ The domain model for this engine will be developed in three layers.  At the high
 
 The concept of a player.  Players are central to all games, and the player constuct is central to the operation of the engine.  A particular game (or instance) will extend this concept to the needs of the instance.  At the core of the system a user is simply and identifier.
 
+```FSharp
            type Identifier = Identofoer of System.Guid
            
            type PlayerID = PlayerID of Identifier
@@ -19,6 +20,8 @@ The concept of a player.  Players are central to all games, and the player const
            
 A typical game will want to create a record of some kind the represents a player, along with constructors and accessor functions.  Here is an example:
 
+```FSharp
+
            type Player = {
               PlayeID: PlayerID;
               Level: int;
@@ -26,12 +29,14 @@ A typical game will want to create a record of some kind the represents a player
               Lives: int;
               
            let getPlayerID {PlayerID playerID}  = playerID
+```
 
 so long as getPlayerID has the signature  `Player -> PlayerID` then it can be injected into the engine to allow the engine to obtain the ID from your record like this:
 
+```FSharp
           Engine.Player.set typeof<Player> getPlayerID
           
-          
+```          
 
 
            
