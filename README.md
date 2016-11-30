@@ -20,7 +20,7 @@ The concept of a player.  Players are central to all games, and the player const
 ```           
            
            
-A typical game will want to create a record of some kind the represents a player, along with constructors and accessor functions.  Here is an example:
+A typical game will want to create a record of some kind that represents a player, along with constructors and accessor functions.  Here is an example:
 
 ```FSharp
 
