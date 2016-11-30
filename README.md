@@ -9,6 +9,8 @@ The domain model for this engine will be developed in three layers.  At the high
 
 ### Level 1
 
+#### The Player
+
 The concept of a player.  Players are central to all games, and the player constuct is central to the operation of the engine.  A particular game (or instance) will extend this concept to the needs of the instance.  At the core of the system a user is simply an identifier.
 
 ```FSharp
@@ -31,11 +33,13 @@ A typical game will want to create a record of some kind the represents a player
            let getPlayerID {PlayerID playerID}  = playerID
 ```
 
-so long as getPlayerID has the signature  `Player -> PlayerID` then it can be injected into the engine to allow the engine to obtain the ID from your record like this:
+So long as getPlayerID has the signature  `Player -> PlayerID` then it can be injected into the engine to allow the engine to obtain the ID from your record like this:
 
 ```FSharp
           Engine.Player.set typeof<Player> getPlayerID
 ```          
 
-           
+#### Actors
+
+Actors are a nother core concept of the engine.  Actors, as the name implies, are game objects that have the ability to act within some context.  Actors have several key components.
            
