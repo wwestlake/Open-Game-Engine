@@ -9,37 +9,27 @@ The domain model for this engine will be developed in three layers.  At the high
 
 ### Level 1
 
-#### The Player
+The level 1 architectures contains conceptual abstract classes that represent a variety of game elements:
 
-The concept of a player.  Players are central to all games, and the player constuct is central to the operation of the engine.  A particular game (or instance) will extend this concept to the needs of the instance.  At the core of the system a user is simply an identifier.
+1. GameObject
 
-```FSharp
-           type Identifier = Identifier of System.Guid
-           
-           type PlayerID = PlayerID of Identifier
-```           
-           
-           
-A typical game will want to create a record of some kind that represents a player, along with constructors and accessor functions.  Here is an example:
+   The GameObject class represents the top of the hierarchy.  This class can not be instantiated as it is abstract.
+   Subclasses must implement `Update(...) and Render(...)` at the basre minimum.  Other methods may me overriden
+   for additional capabilities.
+   
+2. Actor
 
-```FSharp
+   The ActorClass is derived from GameObject and is also abstract but contains built in components for movement and physics.
+   If an object moves in the game it should be based on Actor unless you want to implement custom movement and physics.
+   
+3. Player
 
-           type Player = {
-              PlayerID: PlayerID;
-              Level: int;
-              Health: int;
-              Lives: int;
-           }   
-           let getPlayerID {PlayerID = playerID}  = playerID
-```
+   The Player class represents the active player in the game and contains components for movement and physics that use
+   plyer input as their primary source.
+   
+4. NonPlayerCharacter
 
-So long as getPlayerID has the signature  `Player -> PlayerID` then it can be injected into the engine to allow the engine to obtain the ID from your record like this:
-
-```FSharp
-          Engine.Player.set typeof<Player> getPlayerID
-```          
-
-#### Actors
-
-Actors are a nother core concept of the engine.  Actors, as the name implies, are game objects that have the ability to act within some context.  Actors have several key components.
-           
+   The NonPlayerCharacter class represents NPC's, it contains components for movement and physics as well as AI, path finding,
+   and decision trees.
+   
+   
