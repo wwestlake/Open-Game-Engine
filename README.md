@@ -25,7 +25,7 @@ A typical game will want to create a record of some kind that represents a playe
 ```FSharp
 
            type Player = {
-              PlayeID: PlayerID;
+              PlayerID: PlayerID;
               Level: int;
               Health: int;
               Lives: int;
