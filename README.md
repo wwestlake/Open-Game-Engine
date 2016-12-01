@@ -30,7 +30,7 @@ A typical game will want to create a record of some kind that represents a playe
               Health: int;
               Lives: int;
            }   
-           let getPlayerID {PlayerID playerID}  = playerID
+           let getPlayerID {PlayerID = playerID}  = playerID
 ```
 
 So long as getPlayerID has the signature  `Player -> PlayerID` then it can be injected into the engine to allow the engine to obtain the ID from your record like this:
