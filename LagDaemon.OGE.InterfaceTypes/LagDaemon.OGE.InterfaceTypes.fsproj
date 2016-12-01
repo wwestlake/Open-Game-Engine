@@ -46,8 +46,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="Constants.fs" />
     <Compile Include="GeneralFunctions.fs" />
     <Compile Include="MessageTypes.fs" />
+    <Compile Include="SystemStateTypes.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
   <PropertyGroup>

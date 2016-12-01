@@ -5,14 +5,14 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>4d2e5498-9a13-48e3-b9ab-09eb28c42ec1</ProjectGuid>
+    <ProjectGuid>e901685b-163d-44c9-9c04-28e223b54d30</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>LagDaemon.OGE.FileManager</RootNamespace>
-    <AssemblyName>LagDaemon.OGE.FileManager</AssemblyName>
+    <RootNamespace>LagDaemon.OGE.RulesEngine</RootNamespace>
+    <AssemblyName>LagDaemon.OGE.RulesEngine</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Name>LagDaemon.OGE.FileManager</Name>
+    <Name>LagDaemon.OGE.RulesEngine</Name>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -22,7 +22,7 @@
     <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Debug\LagDaemon.OGE.FileManager.XML</DocumentationFile>
+    <DocumentationFile>bin\Debug\LagDaemon.OGE.RulesEngine.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -31,7 +31,7 @@
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <WarningLevel>3</WarningLevel>
-    <DocumentationFile>bin\Release\LagDaemon.OGE.FileManager.XML</DocumentationFile>
+    <DocumentationFile>bin\Release\LagDaemon.OGE.RulesEngine.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -41,14 +41,10 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
-    <Compile Include="FileIO.fs" />
-    <Compile Include="DirectoryManager.fs" />
-    <Compile Include="FileManager.fs" />
+    <Compile Include="Rules.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
   <ItemGroup>

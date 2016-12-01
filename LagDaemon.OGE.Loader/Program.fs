@@ -23,6 +23,7 @@ namespace LagDaemon.OGE.Loader
 
 module LoaderEntry =
   
+    
     open System
     open System.Drawing
     open OpenTK
@@ -32,9 +33,13 @@ module LoaderEntry =
     open LagDaemon.OGE.MessageService.Router
     open SystemInitialization
     open LagDaemon.OGE.Server.Listener
+    open ConsoleControl
 
     [<EntryPoint>]
     let main argv = 
+#if ! DEBUG
+        do hideConsole() |> ignore
+#endif
         logInfo "Open Game Engine - Loader"
 
         try
@@ -54,8 +59,10 @@ module LoaderEntry =
         with 
             | ex -> logException "An Exception was thrown starting the engine, game exiting" ex 
 
-
-
+#if ! DEBUG
+        do showConsole() |> ignore
+        do BringConsoleToFront () |> ignore
+#endif
         logInfo "Game Engine Shut Down, Press and Key to Exit"
         System.Console.ReadKey(false) |> ignore
 

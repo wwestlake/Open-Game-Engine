@@ -195,6 +195,9 @@ module MessageTypes =
         [<field : DataMember>] 
         TimeStamp: System.DateTime;
 
+        [<DataMember>]
+        Login: string;
+
         [<field : DataMember>]
         Severity: Severity;
 
@@ -204,6 +207,9 @@ module MessageTypes =
         [<field : DataMember>]
         Message: string;
     }
+
+    [<DataContract>]
+    type LogEntryList = LogEntryList of LogEntry list
 
     [<DataContract>]
     type Credentials = {
@@ -223,6 +229,7 @@ module MessageTypes =
 
     let createInfoEntry str = {
                     TimeStamp = System.DateTime.Now;
+                    Login = "Server"
                     Severity = Low;
                     Criticality = Info;
                     Message = str;
@@ -230,6 +237,7 @@ module MessageTypes =
 
     let createWarningEntry str = {
                     TimeStamp = System.DateTime.Now;
+                    Login = "Server"
                     Severity = Medium;
                     Criticality = Warning;
                     Message = str
@@ -237,6 +245,7 @@ module MessageTypes =
 
     let createErrorEntry str = {
                     TimeStamp = System.DateTime.Now;
+                    Login = "Server"
                     Severity = High;
                     Criticality = Error;
                     Message = str;
@@ -245,6 +254,7 @@ module MessageTypes =
 
     let createExceptionEntry str ex = {
                     TimeStamp = System.DateTime.Now;
+                    Login = "Server"
                     Severity = High;
                     Criticality = Exception (str, ex);
                     Message = str;

@@ -119,6 +119,14 @@ module FileIO =
             with
                 | ex -> failex ex
 
+        let writeline (writer: StreamWriter) (text: string) =
+            try 
+                writer.WriteLine(text) |> succeed
+            with
+                | ex -> failex ex
+
+        let fclose (stream : Stream) = stream.Close()
+
 
         type IOBuilder() =
             member this.Bind(x,f) =
@@ -142,6 +150,13 @@ module FileIO =
                 finally 
                     compensation() 
 
+            member this.Combine (a,b) = 
+                match a with
+                | Success _ -> a
+                | Failure _ -> b
+
+            member this.Delay(f) = f()
+
             member this.Using(disposable:#System.IDisposable, body) =
                 let body' = fun () -> body disposable
                 this.TryFinally(body', fun () -> 
@@ -162,5 +177,10 @@ module FileIO =
             fmtStr.Flush()
             
         
+        let deserialize<'T> (stream: Stream) =
+            let result : 'T =  
+                (new System.Runtime.Serialization.Json.DataContractJsonSerializer(typedefof<'T>)).ReadObject(stream) :?> 'T
+            result
+            
 
 

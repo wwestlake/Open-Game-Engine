@@ -24,29 +24,35 @@ namespace LagDaemon.OGE.Logging
 open System
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
 open LagDaemon.OGE.FileManager.DirectoryManager
+open LagDaemon.OGE.FileManager.FileManager
 open LagDaemon.OGE.FileManager.FileIO
 open LagDaemon.OGE.InterfaceTypes.ErrorHandling
 
 module ServerLog =
 
+    let formatLogEntry msg =
+        let { TimeStamp = time; Login = login; Severity = sev; Criticality = crit; Message = m}  = msg
+        match crit with
+        | Exception (m,e) -> sprintf "%A|%s|%A|%A|%s\n%s"  time login sev crit m e.StackTrace |> succeed
+        | Info | Warning | Error -> sprintf "%A|%s|%A|%A|%s"  time login sev crit m |> succeed
+
     /// writes a log entry to the console
     let consoleLog (msg: RopResult<LogEntry,string list>) = File.iorunner {
-        let! { TimeStamp = time; Severity = sev; Criticality = crit; Message = m}  = msg
-        let! result = match crit with
-                      | Exception (m,e) -> printfn "%A|%A|%A|%s\n%s"  time sev crit m e.StackTrace |> succeed
-                      | Info | Warning | Error -> printfn "%A|%A|%A|%s"  time sev crit m |> succeed
-        return msg
+        let! message = msg
+        let! text = formatLogEntry message
+        do printfn "%s" text
+        return () |> succeed
     }
     
 
+
     /// writes a log entry to the daily log file inthe system logs directory
     let fileLog (msg: RopResult<LogEntry,string list>) = File.iorunner {
-        let filename = sprintf "%i%02i%02i.txt" DateTime.Now.Year DateTime.Now.Month DateTime.Now.Day
-        let filepath = makefilepath logs filename
+        use! file = File.fopenAppend (currentLogFile ())
         let! message = msg
-        use! file = File.fopenAppend filepath 
-        serialize message file.BaseStream         
-        return msg
+        let! text = formatLogEntry message
+        let result = File.writeline file text
+        return () |> succeed
     }
 
 

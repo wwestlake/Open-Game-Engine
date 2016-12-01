@@ -21,6 +21,10 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.MessageServic
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.InterfaceTypes", "LagDaemon.OGE.InterfaceTypes\LagDaemon.OGE.InterfaceTypes.fsproj", "{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.RulesEngine", "LagDaemon.OGE.RulesEngine\LagDaemon.OGE.RulesEngine.fsproj", "{E901685B-163D-44C9-9C04-28E223B54D30}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Lang", "LagDaemon.OGE.Lang\LagDaemon.OGE.Lang.fsproj", "{57F39266-53AC-45B2-8521-46EAD5A9E2DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -63,6 +67,14 @@ Global
 		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{032078A2-3A8B-4F1A-8FAF-A33F1A3ABB4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E901685B-163D-44C9-9C04-28E223B54D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E901685B-163D-44C9-9C04-28E223B54D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E901685B-163D-44C9-9C04-28E223B54D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E901685B-163D-44C9-9C04-28E223B54D30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
