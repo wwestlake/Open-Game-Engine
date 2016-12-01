@@ -29,7 +29,7 @@ A typical game will want to create a record of some kind that represents a playe
               Level: int;
               Health: int;
               Lives: int;
-              
+           }   
            let getPlayerID {PlayerID playerID}  = playerID
 ```
 
