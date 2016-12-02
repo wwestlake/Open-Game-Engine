@@ -2,13 +2,12 @@
 open System.Runtime.InteropServices
 
 [<DllImport("Kernel32.dll")>]
-extern int QueryPerformanceCounter(System.IntPtr count)
+extern int QueryPerformanceCounter(System.Int64& count)
 
 [<DllImport("Kernel32.dll")>]
-extern int QueryPerformanceFrequency(System.IntPtr & Frequency);
+extern int QueryPerformanceFrequency(System.Int64& Frequency);
 
-let mutable count = nativeint 10
-
+let mutable count : int64 = 10L
 　
 do QueryPerformanceCounter(count)
 printfn "%i" count
