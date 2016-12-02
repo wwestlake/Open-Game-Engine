@@ -22,8 +22,10 @@
 namespace LagDaemon.OGE.FSOpenGL
 
 open LagDaemon.OGE.InterfaceTypes.MessageTypes
+open LagDaemon.OGE.InterfaceTypes
 open LagDaemon.OGE.Logging.ServerLog
 open LagDaemon.OGE.InterfaceTypes.ErrorHandling
+open LagDaemon.OGE.Interop
 
 module Game =
 
@@ -36,7 +38,7 @@ module Game =
 
     type Game(gameWindow: GameWindow) as x =
         let window = gameWindow
-
+        let timer = new PrecisionTime()
         do window.Load.Add(fun e -> x.load(e))
         do window.Resize.Add(fun e -> x.resize(e))
         do window.UpdateFrame.Add(fun e -> x.updateFrame(e))
@@ -45,9 +47,13 @@ module Game =
 
         member x.load(e) =
             createInfoEntry "Main game loading" |> succeed |> systemLog.Log
+            timer.Start();
         member x.resize(e) =
             do ()
         member x.updateFrame(e) =
+            let deltaTime = TimeKeeper.getFrameData timer
+            //printfn "%s" (TimeKeeper.toString deltaTime)
+            //printfn "Delta Time = %f, Frame Rate = %f" deltaTime (1.0/deltaTime)
             do ()
         member x.renderFrame(e) =
             GL.Clear(ClearBufferMask.ColorBufferBit);

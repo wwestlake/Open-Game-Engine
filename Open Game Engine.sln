@@ -25,6 +25,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.RulesEngine",
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "LagDaemon.OGE.Lang", "LagDaemon.OGE.Lang\LagDaemon.OGE.Lang.fsproj", "{57F39266-53AC-45B2-8521-46EAD5A9E2DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LagDaemon.OGE.Interop", "LagDaemon.OGE.Interop\LagDaemon.OGE.Interop.csproj", "{E9AB2682-BB09-4893-B4FA-9D60515C4C6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57F39266-53AC-45B2-8521-46EAD5A9E2DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9AB2682-BB09-4893-B4FA-9D60515C4C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9AB2682-BB09-4893-B4FA-9D60515C4C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9AB2682-BB09-4893-B4FA-9D60515C4C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9AB2682-BB09-4893-B4FA-9D60515C4C6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
