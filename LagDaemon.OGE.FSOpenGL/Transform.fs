@@ -21,27 +21,28 @@
 
 namespace LagDaemon.OGE.FSOpenGL
 
-open MathNet.Numerics
-open MathNet.Numerics.LinearAlgebra
+open LagDaemon.OGE.FSOpenGL.LinearAlgebra
+open LagDaemon.OGE.FSOpenGL.LinearAlgebra.Vector3
+open LagDaemon.OGE.FSOpenGL.LinearAlgebra.Matrix3
 
 module Transform =
 
     type T = {
-        Location: Vector<float>
-        Rotation: Vector<float>
-        Scale: Vector<float>
+        Location: Vector3.T
+        Rotation: Vector3.T
+        Scale: Vector3.T
     }
 
     /// creates a transform at [0,0,0] with rotation [0,0,0] with scale [1,1,1]
     let zero = { 
-                Location = Vector.Build.Dense(3)
-                Rotation = Vector.Build.Dense(3) 
-                Scale = Vector.Build.Dense(3, fun x -> 1.0) 
+                Location = Vector3.zero
+                Rotation = Vector3.zero
+                Scale = Vector3.one
                }
 
-    let move (dirVector: Vector<float>) (transform: T) =
+    let move (dirVector: Vector3.T) (transform: T) =
         let {Location = loc; Rotation = rot; Scale = scl } = transform
-        let newLocation = loc + dirVector
+        let newLocation = loc |+| dirVector
         {
             transform with Location = newLocation
         }
@@ -52,7 +53,7 @@ module Transform =
     let calc_r alpha beta = (System.Math.Sin ((radians alpha) / 2.0)) * System.Math.Sin(radians beta)
 
 
-    let rotate (rotation: Vector<float>) (transform: T) =
-        let quat = {w = 1.0; x = 1.0; y = 1.0; z = 1.0 }
+    //let rotate (rotation: Vector<float>) (transform: T) =
+    //    let quat = {w = 1.0; x = 1.0; y = 1.0; z = 1.0 }
         
 

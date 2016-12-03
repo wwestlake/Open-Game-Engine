@@ -53,13 +53,6 @@
     <Compile Include="SystemStateTypes.fs" />
     <None Include="Script.fsx" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LagDaemon.OGE.Interop\LagDaemon.OGE.Interop.csproj">
-      <Name>LagDaemon.OGE.Interop</Name>
-      <Project>{e9ab2682-bb09-4893-b4fa-9d60515c4c6d}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-  </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>
   </PropertyGroup>

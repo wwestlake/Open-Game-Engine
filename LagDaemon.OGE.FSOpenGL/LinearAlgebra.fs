@@ -1,11 +1,36 @@
-namespace Math.LinearAlgebra
+(*
+    Open Game Engine
+    Copyright (C) 2016  William W. Westlake
+    wwestlake@lagdaemon.com
 
-　
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    Source code available at: https://github.com/wwestlake/Open-Game-Engine
+*)  
+//#r @"c:\users\wwestlake\documents\visual studio 2015\Projects\Open Game Engine\packages\FParsec.1.0.2\lib\net40-client\FParsecCS.dll"
+//#r @"c:\users\wwestlake\documents\visual studio 2015\Projects\Open Game Engine\packages\FParsec.1.0.2\lib\net40-client\FParsec.dll"
+//#r @"c:\users\wwestlake\documents\visual studio 2015\Projects\Open Game Engine\packages\FParsec-Pipes.0.3.0.0\lib\net45\FParsec-Pipes.dll"
+namespace LagDaemon.OGE.FSOpenGL.LinearAlgebra
+
 module Vector3 =
 
     type T = { X: float; Y: float; Z: float }
 
     let create x y z = {X = x; Y = y; Z = z}
+
+    let zero = create 0.0 0.0 0.0
+    let one = create 1.0 1.0 1.0
 
     let add (v1:T) (v2:T) =
         create (v1.X + v2.X) (v1.Y + v2.Y) (v1.Z + v2.Z)
@@ -32,8 +57,7 @@ module Vector3 =
         let norm = normal a
         create (a.X/norm) (a.Y/norm) (a.Z/norm)
 
-　
-　
+
     /// vector addition
     let (|+|) = add
 
@@ -60,7 +84,7 @@ module Vector3 =
         let pos = clamp 0.0 (easfn x) 1.0
         pos |*| v2 |+| ((1.0 - pos) |*| v1)
 
-　
+
 module Spherical =
     open Vector3
 
@@ -98,6 +122,8 @@ module Matrix3 =
 
     let fromVectors v1 v2 v3 = {c1 = v1; c2 = v2; c3 = v3}
 
+    let unity = create 1.0 0.0 0.0 0.0 1.0 0.0 0.0 0.0 1.0
+
     let cell (m:T) r c =
         match (r, c) with
         | 1,1 -> Some m.c1.X
@@ -130,7 +156,7 @@ module Matrix3 =
                                 (a.c3.X * b.c1.Z + a.c3.Y * b.c2.Z + a.c3.Z * b.c3.Z)
         {c1 = c1; c2 = c2; c3 = c3}
 
-　
+
     let (|&&|) m1 m2 = mul m1 m2
 
     let mulVector (m:T) (v:Vector3.T) =
@@ -168,7 +194,7 @@ module Matrix3 =
             c3 = Vector3.create 0.0 0.0 1.0
         }
 
-　
+
     let rotXY thetaX thetaY =
         (rotateX thetaX) |&&| (rotateY thetaY)
 
@@ -181,5 +207,5 @@ module Matrix3 =
     let rotXYZ thetaX thetaY thetaZ =
         (rotateX thetaX) |&&| (rotateY thetaY) |&&| (rotateZ thetaZ)
 
-　
+
     

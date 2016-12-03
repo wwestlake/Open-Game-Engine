@@ -22,12 +22,9 @@
 namespace LagDaemon.OGE.FSOpenGL
 
 open LagDaemon.OGE.InterfaceTypes.TimeKeeper
-open MathNet.Numerics
-open MathNet.Numerics.LinearAlgebra
 
 module SceneControl =
 
-    
 
     [<AbstractClass>]
     type Renderable() =
@@ -68,7 +65,6 @@ module SceneControl =
     [<AbstractClass>]            
     type GameObject() =
         inherit Renderable()                
-        let transform : Transform = 
 
     type Actor() =
         inherit GameObject()

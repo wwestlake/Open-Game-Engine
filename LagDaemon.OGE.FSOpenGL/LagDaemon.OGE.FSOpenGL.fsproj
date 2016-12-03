@@ -60,6 +60,7 @@
   </Target>
   <ItemGroup>
     <Compile Include="AssemblyInfo.fs" />
+    <Compile Include="LinearAlgebra.fs" />
     <Compile Include="ObjFileParser.fs" />
     <Compile Include="OpenGL.fs" />
     <Compile Include="Transform.fs" />
@@ -86,14 +87,6 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="FSharp.Data.TypeProviders" />
-    <Reference Include="MathNet.Numerics">
-      <HintPath>..\packages\MathNet.Numerics.3.13.1\lib\net40\MathNet.Numerics.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="MathNet.Numerics.FSharp">
-      <HintPath>..\packages\MathNet.Numerics.FSharp.3.13.1\lib\net40\MathNet.Numerics.FSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="OpenTK">
       <HintPath>..\packages\OpenTK.Next.1.1.1616.8959\lib\net20\OpenTK.dll</HintPath>
@@ -105,17 +98,16 @@
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors">
+      <HintPath>..\packages\System.Numerics.Vectors.4.3.0\lib\portable-net45+win8+wp8+wpa81\System.Numerics.Vectors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LagDaemon.OGE.InterfaceTypes\LagDaemon.OGE.InterfaceTypes.fsproj">
       <Name>LagDaemon.OGE.InterfaceTypes</Name>
       <Project>{032078a2-3a8b-4f1a-8faf-a33f1a3abb4c}</Project>
-      <Private>True</Private>
-    </ProjectReference>
-    <ProjectReference Include="..\LagDaemon.OGE.Interop\LagDaemon.OGE.Interop.csproj">
-      <Name>LagDaemon.OGE.Interop</Name>
-      <Project>{e9ab2682-bb09-4893-b4fa-9d60515c4c6d}</Project>
       <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\LagDaemon.OGE.Logging\LagDaemon.OGE.Logging.fsproj">

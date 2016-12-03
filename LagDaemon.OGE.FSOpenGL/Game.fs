@@ -25,7 +25,7 @@ open LagDaemon.OGE.InterfaceTypes.MessageTypes
 open LagDaemon.OGE.InterfaceTypes
 open LagDaemon.OGE.Logging.ServerLog
 open LagDaemon.OGE.InterfaceTypes.ErrorHandling
-open LagDaemon.OGE.Interop
+open LagDaemon.OGE.InterfaceTypes.TimeKeeper
 
 module Game =
 
@@ -38,21 +38,22 @@ module Game =
 
     type Game(gameWindow: GameWindow) as x =
         let window = gameWindow
-        let timer = new PrecisionTime()
         do window.Load.Add(fun e -> x.load(e))
         do window.Resize.Add(fun e -> x.resize(e))
         do window.UpdateFrame.Add(fun e -> x.updateFrame(e))
         do window.RenderFrame.Add(fun e -> x.renderFrame(e))
         do window.Closing.Add(fun e -> x.closing(e))
+        let mutable frameData = masterTime.getFrameData (initFrameData)
 
         member x.load(e) =
             createInfoEntry "Main game loading" |> succeed |> systemLog.Log
-            timer.Start();
+            do masterTime.start () |> ignore
         member x.resize(e) =
             do ()
         member x.updateFrame(e) =
-            let deltaTime = TimeKeeper.getFrameData timer
-            //printfn "%s" (TimeKeeper.toString deltaTime)
+            do frameData <- masterTime.getFrameData(frameData)
+            let gt = createRunTime frameData
+            printfn "%A %A" frameData gt
             //printfn "Delta Time = %f, Frame Rate = %f" deltaTime (1.0/deltaTime)
             do ()
         member x.renderFrame(e) =
