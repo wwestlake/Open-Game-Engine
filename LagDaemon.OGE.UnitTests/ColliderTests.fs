@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-    Source code available at: https://github.com/wwestlake/Open-Game-Engine
+    Source code available at: https://github.com/wwestlake/open-game-research-engine
 *)
 
 namespace LagDaemon.OGE.UnitTests

@@ -16,7 +16,7 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-    Source code available at: https://github.com/wwestlake/Open-Game-Engine
+    Source code available at: https://github.com/wwestlake/open-game-research-engine
 *)  
 //#r @"c:\users\wwestlake\documents\visual studio 2015\Projects\Open Game Engine\packages\FParsec.1.0.2\lib\net40-client\FParsecCS.dll"
 //#r @"c:\users\wwestlake\documents\visual studio 2015\Projects\Open Game Engine\packages\FParsec.1.0.2\lib\net40-client\FParsec.dll"
