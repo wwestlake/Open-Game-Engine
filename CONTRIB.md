@@ -1,4 +1,4 @@
-Creative Commons Attributions
+#Creative Commons Attributions
 -------------------------------------------------------------------------------------
 F# for fun and profit
 Scott Wlaschin
@@ -7,11 +7,11 @@ https://fsharpforfunandprofit.com/
 https://github.com/swlaschin/Railway-Oriented-Programming-Example/tree/master/src
 
 
-Contributers
+#Contributers
 -------------------------------------------------------------------------------------
 William Westlake, wwestlake@lagdaemon.com (Project Coordinator and Originator)
 
-Other Licenses
+#Other Licenses
 -------------------------------------------------------------------------------------
 
 OAuth-in-FSharp 
